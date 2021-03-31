@@ -42,7 +42,7 @@ module.exports = function (message) {
         if(count >= tokens.length || user.user.bot)
             return;
         console.log("[INFO]: Deploying bot for user: ", user.id);
-        const bot = delayBot(tokens[count++], voiceChannel.id, user.id);
+        const bot = delayBot(tokens[count++], voiceChannel.id, user);
         clients.push(bot);
     });
     console.log("[INFO]: Bots deployed: ", count)

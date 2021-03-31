@@ -1,13 +1,19 @@
 require('custom-env').env();
 const delay = process.env.DELAY;
 
-module.exports = async function (client, channelId, userId) {
+module.exports = async function (client, channelId, member) {
     try { // joins the channel
         const voiceChannel = await client.channels.fetch(channelId);
         const connection = await voiceChannel.join();
-        console.log(voiceChannel.id);
-        console.log(connection.status);
+        const guild = voiceChannel.guild;
+        const userId = member.id;
         connection.setSpeaking(0);
+
+        const userDisplayName = guild.member(member).displayName;
+        const userAvatar = member.user.avatarURL();
+        const botMember = guild.member(client.user);
+        await botMember.setNickname(`${userDisplayName}'s Bot`);
+        await client.user.setAvatar(userAvatar);
 
         client.setInterval((client, channel, userId) => { // Checks if user is still in channel
             const members = channel.members;

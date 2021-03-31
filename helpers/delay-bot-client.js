@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const delayVoices = require('./delay-voices');
 
-module.exports = function (token, channelId, userId) {
+module.exports = function (token, channelId, user) {
 
     const client = new Discord.Client();
 
     client.on('ready', () => {
         console.log(`[START]: Logged in as ${client.user.tag}!`);
-        delayVoices(client, channelId, userId);
+        delayVoices(client, channelId, user);
     });
 
     client.on('message', (message) => {
