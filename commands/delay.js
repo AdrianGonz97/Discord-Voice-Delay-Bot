@@ -3,7 +3,7 @@ require('custom-env').env();
 module.exports = async function (message) {
     const client = message.client;
     const voiceChannel = message.member.voice.channel;
-    const delay = process.env.DELAY;
+    const delay = parseInt(process.env.DELAY);
 
     if (voiceChannel) {
         let isAlreadyInChannel = false;

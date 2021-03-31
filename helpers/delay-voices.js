@@ -1,5 +1,7 @@
 require('custom-env').env();
-const delay = process.env.DELAY;
+
+const isRandDelay = process.env.DELAY.toLocaleLowerCase() == "random";
+const delay = parseInt(process.env.DELAY);
 
 module.exports = async function (client, channelId, member) {
     try { // joins the channel
@@ -27,13 +29,14 @@ module.exports = async function (client, channelId, member) {
 
         connection.on('disconnect', () => {
             console.log(`[UPDATE]: Bot disconnected from channel ${connection.channel.id} on guild ${connection.channel.guild.id}`);
+            botMember.setNickname(client.user.username);
         });
         connection.on('ready', () => {
             console.log(`[UPDATE]: Bot connected to channel ${connection.channel.id} on guild ${connection.channel.guild.id}`);
         });
 
         connection.on('speaking', (user, speaking) => { // emitted whenever a user changes speaking state
-            if (user.id != userId) // if not user who called bot
+            if (user.id != userId) // if not assigned user
                 return;
 
             if (speaking.bitfield === 1) {
@@ -41,9 +44,10 @@ module.exports = async function (client, channelId, member) {
 
                 // start recording stream
                 const audio = connection.receiver.createStream(user);
-                setTimeout(() => { 
+                let ranDelay = isRandDelay ? Math.floor(Math.random() * 5000) : delay;
+                setTimeout((connection, audio) => { 
                     connection.play(audio, { type: 'opus' });
-                }, delay);
+                }, ranDelay, connection, audio);
             }
             else if (speaking.bitfield === 0) {
                 console.log(`[UPDATE]: User ${user.id} has stopped speaking!`);
