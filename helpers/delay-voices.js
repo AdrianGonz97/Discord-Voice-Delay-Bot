@@ -10,7 +10,7 @@ module.exports = async function (client, channelId, member) {
         connection.setSpeaking(0);
 
         const userDisplayName = guild.member(member).displayName;
-        const userAvatar = member.user.avatarURL();
+        const userAvatar = member.user.displayAvatarURL();
         const botMember = guild.member(client.user);
         if(botMember.displayName != `${userDisplayName}'s Bot`) {
             await botMember.setNickname(`${userDisplayName}'s Bot`);
