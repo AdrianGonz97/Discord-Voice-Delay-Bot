@@ -10,11 +10,11 @@ module.exports = async function (client, channelId, member) {
         connection.setSpeaking(0);
 
         const userDisplayName = guild.member(member).displayName;
-        const userAvatar = member.user.displayAvatarURL();
+        const userAvatar = member.user.displayAvatarURL();  // FOR CHANGING AVATAR
         const botMember = guild.member(client.user);
         if(botMember.displayName != `${userDisplayName}'s Bot`) {
             await botMember.setNickname(`${userDisplayName}'s Bot`);
-            await client.user.setAvatar(userAvatar);
+            await client.user.setAvatar(userAvatar);  // FOR CHANGING AVATAR
         }
 
         client.setInterval((client, channel, userId) => { // Checks if user is still in channel
