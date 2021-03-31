@@ -12,14 +12,17 @@ module.exports = async function (client, channelId, member) {
         const userDisplayName = guild.member(member).displayName;
         const userAvatar = member.user.avatarURL();
         const botMember = guild.member(client.user);
-        await botMember.setNickname(`${userDisplayName}'s Bot`);
-        await client.user.setAvatar(userAvatar);
+        if(botMember.displayName != `${userDisplayName}'s Bot`) {
+            await botMember.setNickname(`${userDisplayName}'s Bot`);
+            await client.user.setAvatar(userAvatar);
+        }
 
         client.setInterval((client, channel, userId) => { // Checks if user is still in channel
             const members = channel.members;
             const inChannel = members.get(userId)
-            if (!inChannel) // leaves if user not present
-               client.destroy(); 
+            if (!inChannel) { // leaves if user not present
+                client.destroy(); 
+            }
         }, 5000, client, voiceChannel, userId);
 
         connection.on('disconnect', () => {
