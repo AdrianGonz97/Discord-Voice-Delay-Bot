@@ -43,7 +43,7 @@ module.exports = async function (client, channelId, member) {
                 console.log(`[UPDATE]: User ${user.id} is speaking!`);
 
                 // start recording stream
-                const audio = connection.receiver.createStream(user);
+                const audio = connection.receiver.createStream(user, { end: 'silence' });
                 let ranDelay = isRandDelay ? Math.floor(Math.random() * 5000) : delay;
                 setTimeout((connection, audio) => { 
                     connection.play(audio, { type: 'opus' });
