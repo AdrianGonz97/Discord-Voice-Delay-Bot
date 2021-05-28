@@ -19,10 +19,4 @@ module.exports = async function (message) {
             command(message);
         }
     }
-  
-    if (cmd == "s2texit") {  // TEMP TO TEST
-      message.channel.send(`\n\nShutting down Voice Delay Bot.`);
-      console.log(`[EXIT]: Shutting down ${client.user.tag}..`);
-      process.exit(0);
-    }
 }
