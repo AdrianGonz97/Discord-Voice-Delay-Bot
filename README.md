@@ -1,10 +1,10 @@
-# Discord-Delayed-Voice-Bot
+# Discord-Voice-Delay-Bot
 ## **BEFORE GETTING STARTED**
 **The setup process for this bot can be tedious, especially if you plan to use it with many participants simultaneously.
 The reason as to why can be seen at the very bottom of this page. If you have never registered a Discord Bot before, 
 please follow [this guide](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/).**
 ## About
-The Discord-Delayed-Voice-Bot is a chaos inducing Discord bot that aims to annoy every 
+The Discord-Voice-Delay-Bot is a chaos inducing Discord bot that aims to annoy every 
 participating user in a voice channel. The bot achieves this by delaying the voices of each user
 by a given amount of time. 
 
